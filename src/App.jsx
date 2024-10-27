@@ -4,7 +4,6 @@ import { KeyboardControls, CameraControls, PointerLockControls } from "@react-th
 import { DepthOfField, EffectComposer } from "@react-three/postprocessing"
 import { Perf } from "r3f-perf"
 import { useSetAtom } from "jotai"
-import { Analytics } from "@vercel/analytics/react"
 import ReactNipple from "react-nipple"
 import { Route, Routes } from "react-router-dom"
 
@@ -32,9 +31,7 @@ export function App() {
 
   return (
     <>
-      <Analytics />
-
-      {crosshair && <div className='crosshair' />}
+      {crosshair && <div className="crosshair" />}
 
       <html.Out />
 
@@ -91,8 +88,8 @@ function Scene() {
 
         {touch ? <TouchControls /> : <DesktopControls />}
         <Routes>
-          <Route path='/' element={<Lunaria />} />
-          <Route path='/luncmonkeys' element={<LuncMonkeys />} />
+          <Route path="/" element={<Lunaria />} />
+          <Route path="/luncmonkeys" element={<LuncMonkeys />} />
         </Routes>
       </Canvas>
     </>
@@ -106,14 +103,14 @@ function Performance() {
       setShow(!show)
     }
   })
-  return <>{show && <Perf position='bottom-right' />}</>
+  return <>{show && <Perf position="bottom-right" />}</>
 }
 
 function DesktopControls() {
   const ref = useRef()
   const setLock = useSetAtom(lock)
   window.addEventListener("pointerdown", () => setLock(ref.current))
-  return <PointerLockControls ref={ref} selector='#none' makeDefault />
+  return <PointerLockControls ref={ref} selector="#none" makeDefault />
 }
 
 var dif = [0, 0]
