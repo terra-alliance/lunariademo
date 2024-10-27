@@ -3,7 +3,6 @@ import { useAtomValue } from "jotai"
 import { useThree } from "@react-three/fiber"
 import { OrthographicCamera, Hud } from "@react-three/drei"
 // import { OrbitControls } from "@react-three/drei"
-import { useChain } from "@cosmos-kit/react"
 import { useLocation } from "react-router-dom"
 
 import { ui, touch, lock, audio, submenu } from "@/global"
@@ -48,7 +47,7 @@ function Main() {
     <>
       {enter && !menu && (
         <>
-          <Button capsule={false} text='welcome to lunaria' position={[0, size.height / 2 - 200, 0]} size={55} />
+          <Button capsule={false} text="welcome to lunaria" position={[0, size.height / 2 - 200, 0]} size={55} />
           <Button
             onClick={(e) => {
               controls.lock()
@@ -58,41 +57,31 @@ function Main() {
               }, 50)
               e.stopPropagation()
             }}
-            text='Enter'
+            text="Enter"
             position={[0, 0, 0]}
             size={45}
           />
         </>
       )}
-      {touch && welcome && (
-        <Button capsule={false} text='welcome to lunaria' position={[0, size.height / 2 - 250, 0]} size={30} />
-      )}
-      {!touch && (
-        <Button text='Inventory' position={[size.width / 2 - size.width + 150, size.height / 2 - 60, 0]} size={40} />
-      )}
+      {touch && welcome && <Button capsule={false} text="welcome to lunaria" position={[0, size.height / 2 - 250, 0]} size={30} />}
+      {!touch && <Button text="Inventory" position={[size.width / 2 - size.width + 150, size.height / 2 - 60, 0]} size={40} />}
       <Connect size={size} />
     </>
   )
 }
 
 export function Connect({ size }) {
-  const { connect, status } = useChain("terra")
   return (
     <>
       {!touch && (
         <>
-          <Button
-            text={status === "Disconnected" ? "Connect" : status}
-            onClick={() => connect()}
-            position={[size.width / 2 - 220, size.height / 2 - 60, 0]}
-            size={40}
-          />
-          <Button text='Lunc: 0' position={[size.width / 2 - 230, size.height / 2 - 140, 0]} size={40} />
-          <Button text='Ustc: 0' position={[size.width / 2 - 230, size.height / 2 - 210, 0]} size={40} />
+          <Button text={"Connect"} position={[size.width / 2 - 220, size.height / 2 - 60, 0]} size={40} />
+          <Button text="Lunc: 0" position={[size.width / 2 - 230, size.height / 2 - 140, 0]} size={40} />
+          <Button text="Ustc: 0" position={[size.width / 2 - 230, size.height / 2 - 210, 0]} size={40} />
         </>
       )}
 
-      <Wallet animate position={[size.width / 2 - 40, size.height / 2 - 60, 0]} onClick={() => connect()} />
+      <Wallet animate position={[size.width / 2 - 40, size.height / 2 - 60, 0]} />
     </>
   )
 }
